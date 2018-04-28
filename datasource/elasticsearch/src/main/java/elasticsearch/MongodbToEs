@@ -1,0 +1,16 @@
+#   encoding=utf8
+from pymongo import MongoClient
+from elasticsearch import Elasticsearch
+
+_db = MongoClient('mongodb://192.168.1.251:27017')['dev_supermind']
+
+_es = Elasticsearch('192.168.1.253')
+
+docs = _db.get_collection('Event').find()
+
+for doc in docs:
+    doc_id = str(doc.get('_id'))
+    print doc_id
+    doc.pop('_id')
+    doc['id'] = doc_id
+    _es.index('event_index', 'event_type', doc, id=doc_id, refresh=True)

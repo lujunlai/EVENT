@@ -1,0 +1,28 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="domain_config">
+    <resultMap id="BaseResultMap" type="engine.dao.mysql.item.ConfigItem">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="mongodb_host" jdbcType="VARCHAR" property="mongodbHost" />
+        <result column="mongodb_port" jdbcType="VARCHAR" property="mongodbPort" />
+        <result column="mongodb_username" jdbcType="VARCHAR" property="mongodbUsername" />
+        <result column="mongodb_password" jdbcType="VARCHAR" property="mongodbPassword" />
+        <result column="mongodb_dbname" jdbcType="VARCHAR" property="mongodbDbname" />
+        <result column="es_cluster_hosts" jdbcType="VARCHAR" property="esClusterHosts" />
+        <result column="es_cluster_name" jdbcType="VARCHAR" property="esClusterName" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, mongodb_host, mongodb_port, mongodb_username, mongodb_password, mongodb_dbname, 
+        es_cluster_hosts, es_cluster_name
+    </sql>
+
+    <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from domain_config
+        <where>
+            isdel = 0 and id = #{id}
+        </where>
+    </select>
+
+</mapper>
