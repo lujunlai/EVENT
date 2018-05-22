@@ -50,13 +50,13 @@ public class MongodbHelper implements Serializable{
     
     private String password;
     
-    private Integer connectionsPerHost;
+    private Integer connectionsPerHost = 30;
     
-    private Integer threadsAllowedToBlockForConnectionMultiplier;
+    private Integer threadsAllowedToBlockForConnectionMultiplier = 30;
     
-    private Integer maxWaitTime;
+    private Integer maxWaitTime = 60000;
     
-    private Integer connectTimeout;
+    private Integer connectTimeout = 60000;
     
     public MongoDatabase getDataBase(String dbName){
     	return mongoClient.getDatabase(dbName);
@@ -311,7 +311,7 @@ public class MongodbHelper implements Serializable{
     
 	public void afterPropertiesSet() {
 		MongoClientOptions.Builder build = new MongoClientOptions.Builder();
-        build.connectionsPerHost(connectionsPerHost);   //与目标数据库能够建立的最大connection数量为50
+        build.connectionsPerHost(connectionsPerHost);   //与目标数据库能够建立的最大connection数量为30
         build.threadsAllowedToBlockForConnectionMultiplier(threadsAllowedToBlockForConnectionMultiplier); //如果当前所有的connection都在使用中，则每个connection上可以有50个线程排队等待
         /*
          * 一个线程访问数据库的时候，在成功获取到一个可用数据库连接之前的最长等待时间为2分钟

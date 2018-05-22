@@ -28,6 +28,18 @@ public class CreateEsIndex {
 						.startObject("raw").field("type", "string").field("analyzer", "ik").endObject()
 					.endObject()
 				.endObject()
+				.startObject("entities")
+					.startObject("properties")
+						.startObject("涉及产品").field("type", "string").field("index", "not_analyzed").endObject()
+						.startObject("涉及品类").field("type", "string").field("index", "not_analyzed").endObject()
+						.startObject("风险").field("type", "integer").endObject()
+						.startObject("原因").field("type", "string").field("index", "not_analyzed").endObject()
+						.startObject("通报国").field("type", "string").field("index", "not_analyzed").endObject()
+						.startObject("原产国").field("type", "string").field("index", "not_analyzed").endObject()
+						.startObject("涉及生产商").field("type", "string").field("index", "not_analyzed").endObject()
+						.startObject("涉及品牌").field("type", "string").field("index", "not_analyzed").endObject()
+					.endObject()
+				.endObject()
 			.endObject()
 		.endObject();
 		PutMappingRequest mapping = Requests.putMappingRequest(indices).type(mappingType).source(builder);
@@ -48,12 +60,12 @@ public class CreateEsIndex {
 	            .build();
 		TransportClient client = TransportClient.builder().settings(settings).build();
 		client.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("192.168.1.253"), 9300));
-		CreateIndexRequest request = new CreateIndexRequest("event_index");
+		CreateIndexRequest request = new CreateIndexRequest("event_index_qualityrisk");
 		client.admin().indices().create(request);
 		client.close();
-		String[] types = {"event_type"};
+		String[] types = {"event_type_qualityrisk"};
 		for(String type : types) {
-			createMapping("event_index", type);
+			createMapping("event_index_qualityrisk", type);
 		}
 		System.out.println("build success...........");
 	}

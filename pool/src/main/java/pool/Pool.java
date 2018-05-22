@@ -42,6 +42,7 @@ public class Pool implements Filter {
 	
 	private void putElasticsearchHelper(Long configId, ElasticsearchHelper elasticsearchHelper) throws UnknownHostException {
 		if (esPool.get(configId) == null || esPool.get(configId).getClient() == null) {
+			System.out.println("init new elasticsearchHelper, configId: " + configId);
 			elasticsearchHelper.afterPropertiesSet();
 			esPool.put(configId, elasticsearchHelper);
 		}
@@ -50,6 +51,7 @@ public class Pool implements Filter {
 	
 	private void putMongodbHelper(Long configId, MongodbHelper mongodbHelper) {
 		if (mongodbPool.get(configId) == null || mongodbPool.get(configId).getMongoClient() == null) {
+			System.out.println("init new mongodbHelper, configId: " + configId);
 			mongodbHelper.afterPropertiesSet();
 			mongodbPool.put(configId, mongodbHelper);
 		}

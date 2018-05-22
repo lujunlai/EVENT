@@ -32,7 +32,8 @@ public final class Constants {
 	 *
 	 */
 	public enum MainDimension{
-		TIME("时间", "eventTime"), TYPE("类型", "eventType"), AREA("地区", "location"), GOODSTYPE("商品类型", "");
+		TIME("时间", "eventTime"), TYPE("类型", "eventType"), AREA("地区", "location"), GOODSTYPE("涉及品类", "entities.涉及品类"),
+		REASON("原因", "entities.原因");
 		
 		MainDimension(String name, String path){
 			this.name = name;
@@ -53,7 +54,7 @@ public final class Constants {
 	}
 	
 	public enum OtherDimension{
-		ORIGIN("产地", ""), PRODUCER("生产商", ""), BRAND("品牌", ""), RISK("风险", "");
+		ORIGIN("原产国", "entities.原产国"), PRODUCER("涉及生产商", "entities.涉及生产商"), BRAND("涉及品牌", "entities.涉及品牌"), RISK("风险", "entities.风险");
 		
 		OtherDimension(String name, String path){
 			this.name = name;

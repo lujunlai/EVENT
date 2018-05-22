@@ -34,6 +34,19 @@
   </dependencies>
   <build>
     <finalName>engine</finalName>
+    <resources>
+		<!-- 可以将java package下面的配置文件也打包进去  -->
+		<resource>
+			<directory>src/main/java</directory>
+			<includes>
+				<include>**/*.xml</include>
+			</includes>
+			<filtering>false</filtering>
+		</resource>
+		<resource>
+			<directory>src/main/resources</directory>
+		</resource>
+	</resources>
     <plugins>  
       <plugin>  
         <groupId>org.apache.maven.plugins</groupId>  

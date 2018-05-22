@@ -61,8 +61,8 @@ public class PanoramaAnalysisController {
 		}
 	}
     
-    @RequestMapping(value = "/getEventDetail", method = {RequestMethod.POST}, produces = "application/json")
-	public Map<String, Object> getEventContent(@RequestBody String id) {
+    @RequestMapping(value = "/getEventDetail", method = {RequestMethod.GET}, produces = "application/json")
+	public Map<String, Object> getEventContent(String id) {
 		return panoramaAnalysisService.getEventDetail(id);
 	}
 }
